@@ -25,6 +25,22 @@ namespace StaticRayTracer
             GL.ClearColor(Color.Cornsilk);
             GL.Viewport(0, 0, glControl1.Width, glControl1.Height);
             DrawingTools.EnableDefaultAntiAliasing();
+
+            // enable lighting
+            GL.Enable(EnableCap.Lighting);
+            GL.Enable(EnableCap.Light0);
+
+            GL.ShadeModel(ShadingModel.Smooth);
+
+            GL.Enable(EnableCap.DepthTest);
+
+            // setup lighting parameters
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 0, 2, 6, 0 });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { (float)0.5, (float)0.5, (float)0.5, 1 });
+            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { (float)0.9, (float)0.9, (float)0.9, 1 });
+
+            // set large point size
+            GL.PointSize(10);
         }
 
         private void glControl1_Paint(object sender, PaintEventArgs e)
@@ -40,12 +56,8 @@ namespace StaticRayTracer
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             GL.MatrixMode(MatrixMode.Modelview);
-
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 0, 3, 8, 0 });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { (float)0.5, (float)0.5, (float)0.5, 1 });
-            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { (float)0.9, (float)0.9, (float)0.9, 1 });
-
-            GL.PointSize(10);
+            
+            GL.Disable(EnableCap.Lighting);
             GL.Color3(Color.Black);
             GL.Begin(PrimitiveType.Points);
             {
@@ -129,7 +141,7 @@ namespace StaticRayTracer
             GL.PopMatrix();
 
             GL.Enable(EnableCap.Lighting);
-            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.DarkSeaGreen);
+            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.SeaGreen);
 
             GL.PushMatrix();
             {
