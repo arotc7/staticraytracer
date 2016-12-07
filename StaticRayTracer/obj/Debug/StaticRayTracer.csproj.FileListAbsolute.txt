@@ -10,3 +10,15 @@
 \\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
 \\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
 \\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\342lib.dll
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.dll
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
