@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 using csci342;
+using csci342.GlutDrawingReplacements;
 using OpenTK.Graphics;
+using mygraphicslib;
 
 namespace StaticRayTracer
 {
@@ -22,7 +24,7 @@ namespace StaticRayTracer
 
         private void glControl1_Load(object sender, EventArgs e)
         {
-            GL.ClearColor(Color.Cornsilk);
+            GL.ClearColor(Color.White);
             GL.Viewport(0, 0, glControl1.Width, glControl1.Height);
             DrawingTools.EnableDefaultAntiAliasing();
 
@@ -35,7 +37,7 @@ namespace StaticRayTracer
             GL.Enable(EnableCap.DepthTest);
 
             // setup lighting parameters
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 0, 2, 6, 0 });
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 3, 2, 6, 0 });
             GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { (float)0.5, (float)0.5, (float)0.5, 1 });
             GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { (float)0.9, (float)0.9, (float)0.9, 1 });
 
@@ -49,9 +51,14 @@ namespace StaticRayTracer
 
             GLU.Instance.Perspective(60, 1, 1, 40);
 
-            //var eye = new Point3D(0, 0, -2);
-            var eye = new Point3D(-10, 4, 10);
-            var look = new Point3D(0, 0, 3);
+            // what the values should be
+            var eye = new Point3D(-8, 4, 8);
+            var look = new Point3D(0, 0, 4);
+
+            // testing values
+            //var eye = new Point3D(5, 2, 2.4);
+            //var look = new Point3D(0, 0, 0);
+
             GLU.Instance.LookAt(eye, look);
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -60,10 +67,10 @@ namespace StaticRayTracer
 
             // draw the x, y, and z axises
             GL.Disable(EnableCap.Lighting);
-            GL.Color3(Color.Black);
+            GL.Color3(Color.Yellow);
             GL.Begin(PrimitiveType.Points);
             {
-                GL.Vertex3(0, 3, 8);
+                GL.Vertex3(3, 2, 6);
             }
             GL.End();
 
@@ -135,6 +142,7 @@ namespace StaticRayTracer
             {
                 GL.Translate(0, 0, -1);
 
+                GL.Color3(Color.Black);
                 GL.Begin(PrimitiveType.LineLoop);
                 {
                     // top
@@ -160,6 +168,17 @@ namespace StaticRayTracer
                     GL.Vertex3(-1, 0, 0);
                     GL.Vertex3(-1, 1, 0);
                     GL.Vertex3(1, 1, 0);
+                }
+                GL.End();
+
+                GL.Translate(0, 0.5, 1);
+
+                // draw the circle/cylinder on the front side
+                GL.Color3(Color.Black);
+                // GLU.Instance.SolidCylinder(0.5, 0.5, 0.75, 30, 2); // too weird looking
+                GL.Begin(PrimitiveType.LineLoop);
+                {
+                    mygraphicslib.Utilities.DrawArc(0, 0, 0.4, 0, 360);
                 }
                 GL.End();
             }

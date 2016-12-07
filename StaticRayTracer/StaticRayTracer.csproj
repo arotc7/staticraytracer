@@ -37,6 +37,10 @@
       <HintPath>..\packages\342lib.2.1.5\lib\net45\342lib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GlutDrawingReplacements, Version=0.99.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GlutDrawingReplacements.0.99.0.1\lib\net452\GlutDrawingReplacements.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenTK">
       <HintPath>..\..\csci342\Dependencies\OpenTK.dll</HintPath>
     </Reference>
@@ -89,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mygraphicslib\mygraphicslib.csproj">
+      <Project>{797144ad-e81a-4460-b387-49125aac4f73}</Project>
+      <Name>mygraphicslib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticRayTracer", "StaticRayTracer\StaticRayTracer.csproj", "{6B9FDA23-0E40-4E08-85B9-CD32C27BC8B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mygraphicslib", "mygraphicslib\mygraphicslib.csproj", "{797144AD-E81A-4460-B387-49125AAC4F73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6B9FDA23-0E40-4E08-85B9-CD32C27BC8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B9FDA23-0E40-4E08-85B9-CD32C27BC8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B9FDA23-0E40-4E08-85B9-CD32C27BC8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797144AD-E81A-4460-B387-49125AAC4F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797144AD-E81A-4460-B387-49125AAC4F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797144AD-E81A-4460-B387-49125AAC4F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797144AD-E81A-4460-B387-49125AAC4F73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
