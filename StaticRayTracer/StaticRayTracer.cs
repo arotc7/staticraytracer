@@ -56,8 +56,8 @@ namespace StaticRayTracer
             var look = new Point3D(0, 0, 4);
 
             // testing values
-            //var eye = new Point3D(5, 2, 2.4);
-            //var look = new Point3D(0, 0, 0);
+            //var eye = new Point3D(-10, 0, 7);
+            //var look = new Point3D(0, 0, 7);
 
             GLU.Instance.LookAt(eye, look);
 
@@ -73,7 +73,7 @@ namespace StaticRayTracer
                 GL.Vertex3(3, 2, 6);
             }
             GL.End();
-
+            // z axis
             GL.Color3(Color.Black);
             GL.Begin(PrimitiveType.Lines);
             {
@@ -81,7 +81,7 @@ namespace StaticRayTracer
                 GL.Vertex3(0, 0, -1000);
             }
             GL.End();
-
+            // x axis
             GL.Color3(Color.Red);
             GL.Begin(PrimitiveType.Lines);
             {
@@ -89,7 +89,7 @@ namespace StaticRayTracer
                 GL.Vertex3(1000, 0, 0);
             }
             GL.End();
-
+            // y axis
             GL.Color3(Color.Green);
             GL.Begin(PrimitiveType.Lines);
             {
@@ -117,17 +117,17 @@ namespace StaticRayTracer
                 // draw the grid inside the plane
                 GL.Begin(PrimitiveType.Lines);
                 {
-                    var delta = 4 / 10.0;
+                    var delta = 4 / 8.0;
 
                     // horizontal lines
-                    for (var i = 0; i < 10; i++)
+                    for (var i = 0; i < 8; i++)
                     {
                         GL.Vertex3(0, i * delta, 0);
                         GL.Vertex3(4, i * delta, 0);
                     }
 
                     // vertical lines
-                    for (var i = 0; i < 10; i++)
+                    for (var i = 0; i < 8; i++)
                     {
                         GL.Vertex3(i * delta, 0, 0);
                         GL.Vertex3(i * delta, 4, 0);
@@ -195,6 +195,19 @@ namespace StaticRayTracer
                 SolidSphere(1, 100, 100);
             }
             GL.PopMatrix();
+
+            // draw the rays
+            GL.Disable(EnableCap.Lighting);
+            GL.Color3(Color.Blue);
+            GL.Begin(PrimitiveType.Lines);
+            {
+                // draw the ray from the eye to the top of the sphere
+                GL.Vertex3(0.0, 0.5, -0.5);
+                GL.Vertex3(0, 1, 7);
+
+
+            }
+            GL.End();
 
 
             glControl1.SwapBuffers();
