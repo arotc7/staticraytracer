@@ -49,6 +49,7 @@ namespace StaticRayTracer
 
             GLU.Instance.Perspective(60, 1, 1, 40);
 
+            //var eye = new Point3D(0, 0, -2);
             var eye = new Point3D(-10, 4, 10);
             var look = new Point3D(0, 0, 3);
             GLU.Instance.LookAt(eye, look);
@@ -56,7 +57,8 @@ namespace StaticRayTracer
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             GL.MatrixMode(MatrixMode.Modelview);
-            
+
+            // draw the x, y, and z axises
             GL.Disable(EnableCap.Lighting);
             GL.Color3(Color.Black);
             GL.Begin(PrimitiveType.Points);
@@ -89,11 +91,11 @@ namespace StaticRayTracer
             }
             GL.End();
 
-            GL.Color3(Color.Black);
-
             // Draw the "viewing plane"
             GL.PushMatrix();
             {
+                GL.Color3(Color.Black);
+                // draw the plane
                 GL.Translate(-2, -2, 3);
                 GL.Begin(PrimitiveType.LineLoop);
                 {
@@ -103,9 +105,32 @@ namespace StaticRayTracer
                     GL.Vertex3(0, 4, 0);
                 }
                 GL.End();
+
+                GL.Color3(Color.Gray);
+                // draw the grid inside the plane
+                GL.Begin(PrimitiveType.Lines);
+                {
+                    var delta = 4 / 10.0;
+
+                    // horizontal lines
+                    for (var i = 0; i < 10; i++)
+                    {
+                        GL.Vertex3(0, i * delta, 0);
+                        GL.Vertex3(4, i * delta, 0);
+                    }
+
+                    // vertical lines
+                    for (var i = 0; i < 10; i++)
+                    {
+                        GL.Vertex3(i * delta, 0, 0);
+                        GL.Vertex3(i * delta, 4, 0);
+                    }
+                }
+                GL.End();
             }
             GL.PopMatrix();
 
+            // draw the camera shape
             GL.PushMatrix();
             {
                 GL.Translate(0, 0, -1);
@@ -140,15 +165,18 @@ namespace StaticRayTracer
             }
             GL.PopMatrix();
 
+            // enable the lighting and set the material
             GL.Enable(EnableCap.Lighting);
             GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.SeaGreen);
 
+            // draw the sphere
             GL.PushMatrix();
             {
                 GL.Translate(0, 0, 7);
                 SolidSphere(1, 100, 100);
             }
             GL.PopMatrix();
+
 
             glControl1.SwapBuffers();
         }
