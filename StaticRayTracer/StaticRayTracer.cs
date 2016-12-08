@@ -17,8 +17,11 @@ namespace StaticRayTracer
 {
     public partial class StaticRayTracer : Form
     {
+        private Point3D _lightingPoint;
+
         public StaticRayTracer()
         {
+            _lightingPoint = new Point3D(3, 2, 6);
             InitializeComponent();
         }
 
@@ -37,7 +40,7 @@ namespace StaticRayTracer
             GL.Enable(EnableCap.DepthTest);
 
             // setup lighting parameters
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 3, 2, 6, 0 });
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { (float)_lightingPoint.X, (float)_lightingPoint.Y, (float)_lightingPoint.Z, 0 });
             GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { (float)0.5, (float)0.5, (float)0.5, 1 });
             GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { (float)0.9, (float)0.9, (float)0.9, 1 });
 
@@ -56,7 +59,7 @@ namespace StaticRayTracer
             //var look = new Point3D(0, 0, 4);
 
             // testing values
-            var eye = new Point3D(0, 0, -7);
+            var eye = new Point3D(-7, 2, 7);
             var look = new Point3D(0, 0, 7);
 
             GLU.Instance.LookAt(eye, look);
@@ -70,7 +73,7 @@ namespace StaticRayTracer
             GL.Color3(Color.Yellow);
             GL.Begin(PrimitiveType.Points);
             {
-                GL.Vertex3(3, 2, 6);
+                GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
             }
             GL.End();
             // z axis
@@ -204,13 +207,38 @@ namespace StaticRayTracer
                 // draw the ray from the eye to the top of the sphere
                 GL.Vertex3(0.0, 0.0, 0.0);
                 GL.Vertex3(0, 1, 7);
-
-
             }
             GL.End();
 
+            GL.Disable(EnableCap.Lighting);
+            GL.Color3(Color.LightGray);
+
+            GL.PushMatrix();
+            {
+                Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
+                lightToSphere *= (1 / lightToSphere.Length);
+
+                double lightToPlane = projection(new Vector3(0, 1, 0), lightToSphere).Length;
+
+                lightToSphere *= lightToPlane;
+
+                GL.Translate(-1 * (_lightingPoint.X + lightToSphere.X), -1 * (_lightingPoint.Y + lightToSphere.Y), _lightingPoint.Z + lightToSphere.Z);
+                GL.Rotate(90, 1, 0, 0);
+
+                GL.Begin(PrimitiveType.Polygon);
+                {
+                    Utilities.DrawArc(0, 0, 2, 0, 360);
+                }
+                GL.End();
+            }
+            GL.PopMatrix();
 
             glControl1.SwapBuffers();
+        }
+
+        public Vector3 projection(Vector3 projectedOn, Vector3 vector)
+        {
+            return (projectedOn.Dot(vector) / projectedOn.Dot(projectedOn)) * projectedOn;
         }
 
         public static void SolidSphere(double radius, int verticalDivisions, int horizontalDivisions)
