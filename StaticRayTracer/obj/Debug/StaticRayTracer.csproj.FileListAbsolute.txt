@@ -25,3 +25,16 @@ C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\GlutDrawingRepl
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\342lib.dll
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\GlutDrawingReplacements.dll
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
+H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb

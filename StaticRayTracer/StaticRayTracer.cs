@@ -52,12 +52,12 @@ namespace StaticRayTracer
             GLU.Instance.Perspective(60, 1, 1, 40);
 
             // what the values should be
-            var eye = new Point3D(-8, 4, 8);
-            var look = new Point3D(0, 0, 4);
+            //var eye = new Point3D(-8, 4, 8);
+            //var look = new Point3D(0, 0, 4);
 
             // testing values
-            //var eye = new Point3D(-10, 0, 7);
-            //var look = new Point3D(0, 0, 7);
+            var eye = new Point3D(0, 0, -7);
+            var look = new Point3D(0, 0, 7);
 
             GLU.Instance.LookAt(eye, look);
 
@@ -140,7 +140,7 @@ namespace StaticRayTracer
             // draw the camera shape
             GL.PushMatrix();
             {
-                GL.Translate(0, 0, -1);
+                GL.Translate(0, -0.5, -1);
 
                 GL.Color3(Color.Black);
                 GL.Begin(PrimitiveType.LineLoop);
@@ -202,7 +202,7 @@ namespace StaticRayTracer
             GL.Begin(PrimitiveType.Lines);
             {
                 // draw the ray from the eye to the top of the sphere
-                GL.Vertex3(0.0, 0.5, -0.5);
+                GL.Vertex3(0.0, 0.0, 0.0);
                 GL.Vertex3(0, 1, 7);
 
 

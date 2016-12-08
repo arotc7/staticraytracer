@@ -35,10 +35,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK">
-      <HintPath>..\Dependencies\OpenTK.dll</HintPath>
+      <HintPath>..\StaticRayTracer\References\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.GLControl">
-      <HintPath>..\Dependencies\OpenTK.GLControl.dll</HintPath>
+      <HintPath>..\StaticRayTracer\References\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
