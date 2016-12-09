@@ -117,6 +117,24 @@ namespace StaticRayTracer
             }
             GL.End();
 
+            //GL.Enable(EnableCap.Lighting);
+            //GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.Cornsilk);
+
+            GL.Color3(Color.Cornsilk);
+            GL.Begin(PrimitiveType.Polygon);
+            {
+                GL.Normal3(0, 1, 0);
+                GL.Vertex3(10000, -2, 10000);
+                GL.Normal3(0, 1, 0);
+                GL.Vertex3(10000, -2, -10000);
+                GL.Normal3(0, 1, 0);
+                GL.Vertex3(-10000, -2, -10000);
+                GL.Normal3(0, 1, 0);
+                GL.Vertex3(-10000, -2, 10000);
+            }
+            GL.End();
+            GL.Disable(EnableCap.Lighting);
+
             // Draw the "viewing plane"
             GL.PushMatrix();
             {
@@ -235,7 +253,7 @@ namespace StaticRayTracer
             // calculated from the line to a point intersection formula. 
             // equation of the plane is y + 2 = 0
             // equation of the line is _lightSource + t * lightToSphere
-            double lightToPlaneDistance = (-2 - _lightingPoint.Y) / lightToSphere.Y;
+            double lightToPlaneDistance = (-1.98 - _lightingPoint.Y) / lightToSphere.Y;
 
             lightToSphere *= lightToPlaneDistance;
 
