@@ -69,7 +69,7 @@ namespace StaticRayTracer
             else
             {
                 // testing values
-                eye = new Point3D(0, 10, 0);
+                eye = new Point3D(0, 0, 0);
                 look = new Point3D(0, 0, 7);
             }
 
