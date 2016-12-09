@@ -21,7 +21,7 @@ namespace StaticRayTracer
 
         public StaticRayTracer()
         {
-            _lightingPoint = new Point3D(3, 2, 6);
+            _lightingPoint = new Point3D(2, 3, 4);
             InitializeComponent();
         }
 
@@ -39,11 +39,6 @@ namespace StaticRayTracer
 
             GL.Enable(EnableCap.DepthTest);
 
-            // setup lighting parameters
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { (float)_lightingPoint.X, (float)_lightingPoint.Y, (float)_lightingPoint.Z, 0 });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { (float)0.5, (float)0.5, (float)0.5, 1 });
-            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { (float)0.9, (float)0.9, (float)0.9, 1 });
-
             // set large point size
             GL.PointSize(10);
         }
@@ -52,30 +47,44 @@ namespace StaticRayTracer
         {
             if (!glControl1.IsHandleCreated) { return; }
 
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadIdentity();
             GLU.Instance.Perspective(60, 1, 1, 40);
 
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadIdentity();
             // what the values should be
-            //var eye = new Point3D(-8, 4, 8);
-            //var look = new Point3D(0, 0, 4);
+            var eye = new Point3D(-8, 4, 8);
+            var look = new Point3D(0, 0, 4);
 
             // testing values
-            var eye = new Point3D(-7, 2, 7);
-            var look = new Point3D(0, 0, 7);
+            //var eye = new Point3D(0, 10, 0);
+            //var look = new Point3D(0, 0, 7);
 
             GLU.Instance.LookAt(eye, look);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            // setup lighting parameters
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { (float)_lightingPoint.X, (float)_lightingPoint.Y, (float)_lightingPoint.Z, 1 });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { (float)0.5, (float)0.5, (float)0.5, 1 });
+            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { (float)0.9, (float)0.9, (float)0.9, 1 });
 
             GL.MatrixMode(MatrixMode.Modelview);
 
             // draw the x, y, and z axises
             GL.Disable(EnableCap.Lighting);
             GL.Color3(Color.Yellow);
-            GL.Begin(PrimitiveType.Points);
+            GL.PushMatrix();
             {
-                GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
+                GL.Begin(PrimitiveType.Points);
+                {
+                    GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
+                }
+                GL.End();
             }
-            GL.End();
+            GL.PopMatrix();
+            
             // z axis
             GL.Color3(Color.Black);
             GL.Begin(PrimitiveType.Lines);
@@ -213,21 +222,26 @@ namespace StaticRayTracer
             GL.Disable(EnableCap.Lighting);
             GL.Color3(Color.LightGray);
 
+            // draw the shadow
             GL.PushMatrix();
             {
                 Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
                 lightToSphere *= (1 / lightToSphere.Length);
 
-                double lightToPlane = projection(new Vector3(0, 1, 0), lightToSphere).Length;
+                // calculated from the line to a point intersection formula. 
+                // equation of the plane is y + 2 = 0
+                // equation of the line is _lightSource + t * lightToSphere
+                double lightToPlaneDistance = (-2-_lightingPoint.Y)/lightToSphere.Y;
 
-                lightToSphere *= lightToPlane;
+                lightToSphere *= lightToPlaneDistance;
 
-                GL.Translate(-1 * (_lightingPoint.X + lightToSphere.X), -1 * (_lightingPoint.Y + lightToSphere.Y), _lightingPoint.Z + lightToSphere.Z);
+                GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
                 GL.Rotate(90, 1, 0, 0);
+                GL.Scale(1.4, 1, 1); // todo mathmatically calculate the skew in each x and y directions
 
                 GL.Begin(PrimitiveType.Polygon);
                 {
-                    Utilities.DrawArc(0, 0, 2, 0, 360);
+                    Utilities.DrawArc(0, 0, 1, 0, 360);
                 }
                 GL.End();
             }
@@ -320,6 +334,16 @@ namespace StaticRayTracer
             }
 
             return points;
+        }
+
+        private int delta = 0;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            delta += 1;
+            _lightingPoint.Z = 4 + 0.10 * (delta % 40);
+
+            glControl1.Invalidate();
         }
     }
 }

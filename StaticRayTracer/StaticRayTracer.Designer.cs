@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.glControl1 = new OpenTK.GLControl();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // glControl1
@@ -43,6 +45,12 @@
             this.glControl1.VSync = false;
             this.glControl1.Load += new System.EventHandler(this.glControl1_Load);
             this.glControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl1_Paint);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // StaticRayTracer
             // 
@@ -63,6 +71,7 @@
 
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private OpenTK.GLControl glControl1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
