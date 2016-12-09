@@ -69,8 +69,8 @@ namespace StaticRayTracer
             else
             {
                 // testing values
-                eye = new Point3D(0, 0, 0);
-                look = new Point3D(0, 0, 7);
+                eye = new Point3D(0, 0, -2);
+                look = new Point3D(0, 0, 10);
             }
 
             GLU.Instance.LookAt(eye, look);
@@ -136,20 +136,21 @@ namespace StaticRayTracer
                 // draw the grid inside the plane
                 GL.Begin(PrimitiveType.Lines);
                 {
-                    var delta = 4 / 8.0;
+                    double wDelta = 4.0 / (double)glControl1.Size.Width;
+                    double hDelta = 4.0 / (double)glControl1.Size.Height;
 
                     // horizontal lines
-                    for (var i = 0; i < 8; i++)
+                    for (var i = 0; i < glControl1.Size.Height; i += 10)
                     {
-                        GL.Vertex3(0, i * delta, 0);
-                        GL.Vertex3(4, i * delta, 0);
+                        GL.Vertex3(0, i * hDelta, 0);
+                        GL.Vertex3(4, i * hDelta, 0);
                     }
 
                     // vertical lines
-                    for (var i = 0; i < 8; i++)
+                    for (var i = 0; i < glControl1.Size.Width; i += 10)
                     {
-                        GL.Vertex3(i * delta, 0, 0);
-                        GL.Vertex3(i * delta, 4, 0);
+                        GL.Vertex3(i * wDelta, 0, 0);
+                        GL.Vertex3(i * wDelta, 4, 0);
                     }
                 }
                 GL.End();
