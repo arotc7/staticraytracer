@@ -39,12 +39,14 @@
             this.glControl1.BackColor = System.Drawing.Color.Black;
             this.glControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.glControl1.Location = new System.Drawing.Point(0, 0);
+            this.glControl1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.glControl1.Name = "glControl1";
-            this.glControl1.Size = new System.Drawing.Size(584, 562);
+            this.glControl1.Size = new System.Drawing.Size(1168, 1081);
             this.glControl1.TabIndex = 4;
             this.glControl1.VSync = false;
             this.glControl1.Load += new System.EventHandler(this.glControl1_Load);
             this.glControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl1_Paint);
+            this.glControl1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.glControl1_KeyPress);
             // 
             // timer1
             // 
@@ -54,11 +56,12 @@
             // 
             // StaticRayTracer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 562);
+            this.ClientSize = new System.Drawing.Size(1168, 1081);
             this.Controls.Add(this.glControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StaticRayTracer";

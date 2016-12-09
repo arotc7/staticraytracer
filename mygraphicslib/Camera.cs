@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using csci342;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
 using KeyPressEventArgs = System.Windows.Forms.KeyPressEventArgs;
-using Vector3 = csci342.Vector3;
 
 namespace mygraphicslib
 {

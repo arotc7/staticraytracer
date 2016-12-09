@@ -18,6 +18,7 @@ namespace StaticRayTracer
     public partial class StaticRayTracer : Form
     {
         private Point3D _lightingPoint;
+        private bool _testing;
 
         public StaticRayTracer()
         {
@@ -55,13 +56,22 @@ namespace StaticRayTracer
 
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
-            // what the values should be
-            var eye = new Point3D(-8, 4, 8);
-            var look = new Point3D(0, 0, 4);
 
-            // testing values
-            //var eye = new Point3D(0, 10, 0);
-            //var look = new Point3D(0, 0, 7);
+            var eye = new Point3D();
+            var look = new Point3D();
+
+            if (!_testing)
+            {
+                // what the values should be
+                eye = new Point3D(-8, 4, 8);
+                look = new Point3D(0, 0, 4);
+            }
+            else
+            {
+                // testing values
+                eye = new Point3D(0, 10, 0);
+                look = new Point3D(0, 0, 7);
+            }
 
             GLU.Instance.LookAt(eye, look);
 
@@ -77,11 +87,8 @@ namespace StaticRayTracer
             GL.Color3(Color.Yellow);
             GL.PushMatrix();
             {
-                GL.Begin(PrimitiveType.Points);
-                {
-                    GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
-                }
-                GL.End();
+                GL.Translate(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
+                SolidSphere(.2, 50, 50);
             }
             GL.PopMatrix();
             
@@ -211,13 +218,25 @@ namespace StaticRayTracer
             // draw the rays
             GL.Disable(EnableCap.Lighting);
             GL.Color3(Color.Blue);
-            GL.Begin(PrimitiveType.Lines);
+            GL.Begin(PrimitiveType.LineStrip);
             {
                 // draw the ray from the eye to the top of the sphere
                 GL.Vertex3(0.0, 0.0, 0.0);
                 GL.Vertex3(0, 1, 7);
+                GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
             }
             GL.End();
+
+            // Math to find where to place the shadow
+            Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
+            lightToSphere *= (1 / lightToSphere.Length);
+
+            // calculated from the line to a point intersection formula. 
+            // equation of the plane is y + 2 = 0
+            // equation of the line is _lightSource + t * lightToSphere
+            double lightToPlaneDistance = (-2 - _lightingPoint.Y) / lightToSphere.Y;
+
+            lightToSphere *= lightToPlaneDistance;
 
             GL.Disable(EnableCap.Lighting);
             GL.Color3(Color.LightGray);
@@ -225,16 +244,6 @@ namespace StaticRayTracer
             // draw the shadow
             GL.PushMatrix();
             {
-                Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
-                lightToSphere *= (1 / lightToSphere.Length);
-
-                // calculated from the line to a point intersection formula. 
-                // equation of the plane is y + 2 = 0
-                // equation of the line is _lightSource + t * lightToSphere
-                double lightToPlaneDistance = (-2-_lightingPoint.Y)/lightToSphere.Y;
-
-                lightToSphere *= lightToPlaneDistance;
-
                 GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
                 GL.Rotate(90, 1, 0, 0);
                 GL.Scale(1.4, 1, 1); // todo mathmatically calculate the skew in each x and y directions
@@ -246,6 +255,16 @@ namespace StaticRayTracer
                 GL.End();
             }
             GL.PopMatrix();
+
+            GL.Color3(Color.Blue);
+            // Draw the vector to the shadow
+            GL.Begin(PrimitiveType.LineStrip);
+            {
+                GL.Vertex3(0, 0, 0);
+                GL.Vertex3(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
+                GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
+            }
+            GL.End();
 
             glControl1.SwapBuffers();
         }
@@ -344,6 +363,14 @@ namespace StaticRayTracer
             _lightingPoint.Z = 4 + 0.10 * (delta % 40);
 
             glControl1.Invalidate();
+        }
+
+        private void glControl1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == 't')
+            {
+                _testing = !_testing;
+            }
         }
     }
 }

@@ -30,15 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="342lib, Version=2.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\342lib.2.1.5\lib\net45\342lib.dll</HintPath>
+    <Reference Include="342lib, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\342lib.2.1.4\lib\net45\342lib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK">
-      <HintPath>..\StaticRayTracer\References\OpenTK.dll</HintPath>
+      <HintPath>..\..\csci342\Dependencies\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK.GLControl">
-      <HintPath>..\StaticRayTracer\References\OpenTK.GLControl.dll</HintPath>
+      <HintPath>..\..\csci342\Dependencies\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,7 +46,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
