@@ -117,24 +117,6 @@ namespace StaticRayTracer
             }
             GL.End();
 
-            //GL.Enable(EnableCap.Lighting);
-            //GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.Cornsilk);
-
-            GL.Color3(Color.Cornsilk);
-            GL.Begin(PrimitiveType.Polygon);
-            {
-                GL.Normal3(0, 1, 0);
-                GL.Vertex3(10000, -2, 10000);
-                GL.Normal3(0, 1, 0);
-                GL.Vertex3(10000, -2, -10000);
-                GL.Normal3(0, 1, 0);
-                GL.Vertex3(-10000, -2, -10000);
-                GL.Normal3(0, 1, 0);
-                GL.Vertex3(-10000, -2, 10000);
-            }
-            GL.End();
-            GL.Disable(EnableCap.Lighting);
-
             // Draw the "viewing plane"
             GL.PushMatrix();
             {
@@ -225,12 +207,29 @@ namespace StaticRayTracer
             // enable the lighting and set the material
             GL.Enable(EnableCap.Lighting);
             GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.SeaGreen);
-
+            
             // draw the sphere
             GL.PushMatrix();
             {
                 GL.Translate(0, 0, 7);
                 SolidSphere(1, 100, 100);
+            }
+            GL.PopMatrix();
+
+            GL.Disable(EnableCap.Lighting);
+            GL.PushMatrix();
+            {
+                GL.Color3(Color.Cornsilk);
+                GL.Translate(0, -2, 0);
+                GL.Begin(PrimitiveType.TriangleFan);
+                {
+                    GL.Normal3(0, 1, 0);
+                    GL.Vertex3(5, 0, 10);
+                    GL.Vertex3(5, 0, -10);
+                    GL.Vertex3(-5, 0, -10);
+                    GL.Vertex3(-5, 0, 10);
+                }
+                GL.End();
             }
             GL.PopMatrix();
 
