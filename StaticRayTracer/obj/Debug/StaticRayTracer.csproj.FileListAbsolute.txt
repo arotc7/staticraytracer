@@ -1,70 +1,15 @@
-\\torque3\matthew.blessed\my documents\visual studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\342lib.dll
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\OpenTK.dll
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
-\\torque3\matthew.blessed\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\342lib.dll
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.dll
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
-C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\GlutDrawingReplacements.dll
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.dll
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\342lib.dll
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\GlutDrawingReplacements.dll
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
-H:\My Documents\Visual Studio 2015\Projects\StaticRayTracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\342lib.dll
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\GlutDrawingReplacements.dll
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.dll
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
-C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\342lib.dll
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\GlutDrawingReplacements.dll
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.dll
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
-C:\Users\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
+C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache

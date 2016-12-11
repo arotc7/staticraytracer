@@ -20,10 +20,20 @@ namespace StaticRayTracer
         private Point3D _lightingPoint;
         private Vector3 _cameraOffset;
 
-        double iterI = .05;
-        double iterJ = .05;
+        //double iterI = .05;
+        //double iterJ = .05;
+
+        private double viewingPlaneIterator = 0;
 
         private bool _testing;
+
+        enum Mode
+        {
+            Lighting,
+            ViewingPlaneRays
+        }
+
+        private Mode _mode = Mode.Lighting;
 
         public StaticRayTracer()
         {
@@ -97,7 +107,7 @@ namespace StaticRayTracer
                 SolidSphere(.2, 50, 50);
             }
             GL.PopMatrix();
-            
+            /*
             // z axis
             GL.Color3(Color.Black);
             GL.Begin(PrimitiveType.Lines);
@@ -121,7 +131,7 @@ namespace StaticRayTracer
                 GL.Vertex3(0, -10000, 0);
                 GL.Vertex3(0, 10000, 0);
             }
-            GL.End();
+            GL.End();*/
 
             // Draw the "viewing plane"
             GL.PushMatrix();
@@ -142,18 +152,18 @@ namespace StaticRayTracer
                 // draw the grid inside the plane
                 GL.Begin(PrimitiveType.Lines);
                 {
-                    double wDelta = 4.0 / (double)glControl1.Size.Width;
-                    double hDelta = 4.0 / (double)glControl1.Size.Height;
+                    double wDelta = 4.0 / 10;
+                    double hDelta = 4.0 / 10;
 
                     // horizontal lines
-                    for (var i = 0; i < glControl1.Size.Height; i += 10)
+                    for (var i = 0; i < 10; i++)
                     {
                         GL.Vertex3(0, i * hDelta, 0);
                         GL.Vertex3(4, i * hDelta, 0);
                     }
 
                     // vertical lines
-                    for (var i = 0; i < glControl1.Size.Width; i += 10)
+                    for (var i = 0; i < 10; i++)
                     {
                         GL.Vertex3(i * wDelta, 0, 0);
                         GL.Vertex3(i * wDelta, 4, 0);
@@ -163,28 +173,36 @@ namespace StaticRayTracer
             }
             GL.PopMatrix();
 
-            if (!_testing)
+            if (_mode == Mode.ViewingPlaneRays)
             {
                 GL.Color3(Color.Blue);
-                GL.Begin(PrimitiveType.LineStrip);
+                var d = viewingPlaneIterator % 40.0;
+                var y = Math.Floor(d / 4.0) * 0.4;
+                var x = d % 4.0;
+                if (!_testing)
                 {
-                    Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(2 - iterI, 2 - iterJ + .02, 3));
-                    rayVector *= (1 / rayVector.Length);
-                    rayVector *= 100;
-                    GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                    GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
+                    // if not testing, show rays through the viewing plane
+                    GL.Begin(PrimitiveType.LineStrip);
+                    {
+                        Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(x-2.0+0.2, y-2.0+0.2, 3));
+                        rayVector *= (1 / rayVector.Length);
+                        rayVector *= 10;
+                        GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                        GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
+                    }
+                    GL.End();
                 }
-                GL.End();
-            }
-
-            if (_testing)
-            {
-                GL.PointSize(2);
-                GL.Begin(PrimitiveType.Points);
+                else
                 {
-                    GL.Vertex3(2 - iterI, 2 - iterJ - .02, 3);
+                    // if testing eye point, display points in each grid point on the viewing plane
+                    GL.PointSize(10);
+                    GL.Begin(PrimitiveType.Points);
+                    {
+                        // GL.Vertex3(2 - iterI, 2 - iterJ - .02, 3);
+                        GL.Vertex3(x-2.0+0.2, y-2.0+0.2, 3);
+                    }
+                    GL.End();
                 }
-                GL.End();
             }
 
             // draw the camera shape
@@ -246,6 +264,7 @@ namespace StaticRayTracer
             }
             GL.PopMatrix();
 
+            // draw floor
             GL.Disable(EnableCap.Lighting);
             GL.PushMatrix();
             {
@@ -263,56 +282,60 @@ namespace StaticRayTracer
             }
             GL.PopMatrix();
 
-            // draw the rays
-            GL.Disable(EnableCap.Lighting);
-            GL.Color3(Color.Blue);
-            GL.Begin(PrimitiveType.LineStrip);
+
+            if (_mode == Mode.Lighting)
             {
-                // draw the ray from the eye to the top of the sphere
-                GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                GL.Vertex3(0, 1, 7);
-                GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
-            }
-            GL.End();
-
-            // Math to find where to place the shadow
-            Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
-            lightToSphere *= (1 / lightToSphere.Length);
-
-            // calculated from the line to a point intersection formula. 
-            // equation of the plane is y + 2 = 0
-            // equation of the line is _lightSource + t * lightToSphere
-            double lightToPlaneDistance = (-1.98 - _lightingPoint.Y) / lightToSphere.Y;
-
-            lightToSphere *= lightToPlaneDistance;
-
-            GL.Disable(EnableCap.Lighting);
-            GL.Color3(Color.LightGray);
-
-            // draw the shadow
-            GL.PushMatrix();
-            {
-                GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
-                GL.Rotate(90, 1, 0, 0);
-                GL.Scale(1.4, 1, 1); // todo mathmatically calculate the skew in each x and y directions
-
-                GL.Begin(PrimitiveType.Polygon);
+                // draw the rays
+                GL.Disable(EnableCap.Lighting);
+                GL.Color3(Color.Blue);
+                GL.Begin(PrimitiveType.LineStrip);
                 {
-                    Utilities.DrawArc(0, 0, 1, 0, 360);
+                    // draw the ray from the eye to the top of the sphere
+                    GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                    GL.Vertex3(0, 1, 7);
+                    GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
+                }
+                GL.End();
+
+                // Math to find where to place the shadow
+                Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
+                lightToSphere *= (1 / lightToSphere.Length);
+
+                // calculated from the line to a point intersection formula. 
+                // equation of the plane is y + 2 = 0
+                // equation of the line is _lightSource + t * lightToSphere
+                double lightToPlaneDistance = (-1.98 - _lightingPoint.Y) / lightToSphere.Y;
+
+                lightToSphere *= lightToPlaneDistance;
+
+                GL.Disable(EnableCap.Lighting);
+                GL.Color3(Color.LightGray);
+
+                // draw the shadow
+                GL.PushMatrix();
+                {
+                    GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
+                    GL.Rotate(90, 1, 0, 0);
+                    GL.Scale(1.4, 1, 1); // todo mathmatically calculate the skew in each x and y directions
+
+                    GL.Begin(PrimitiveType.Polygon);
+                    {
+                        Utilities.DrawArc(0, 0, 1, 0, 360);
+                    }
+                    GL.End();
+                }
+                GL.PopMatrix();
+
+                GL.Color3(Color.Blue);
+                // Draw the vector to the shadow
+                GL.Begin(PrimitiveType.LineStrip);
+                {
+                    GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                    GL.Vertex3(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
+                    GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
                 }
                 GL.End();
             }
-            GL.PopMatrix();
-
-            GL.Color3(Color.Blue);
-            // Draw the vector to the shadow
-            GL.Begin(PrimitiveType.LineStrip);
-            {
-                GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                GL.Vertex3(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
-                GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
-            }
-            GL.End();
 
             glControl1.SwapBuffers();
         }
@@ -403,51 +426,38 @@ namespace StaticRayTracer
             return points;
         }
 
+        private void glControl1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 't')
+            {
+                _testing = !_testing;
+                glControl1.Invalidate();
+            }
+            else if (e.KeyChar == 'p')
+            {
+                timer1.Enabled = !timer1.Enabled;
+            }
+            else if (e.KeyChar == 'm')
+            {
+                _mode = _mode == Mode.Lighting ? Mode.ViewingPlaneRays : Mode.Lighting;
+            }
+        }
+
         private int delta = 0;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            delta += 1;
-            _lightingPoint.Z = 4 + 0.10 * (delta % 40);
-
-            glControl1.Invalidate();
-        }
-
-        private void glControl1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == 't')
+            // move the lighting point
+            if (_mode == Mode.Lighting)
             {
-                _testing = !_testing;
-                glControl1.Invalidate();
-            } else if(e.KeyChar == 'p')
-            {
-                timer1.Enabled = !timer1.Enabled;
+                delta += 1;
+                _lightingPoint.Z = 4 + 0.10 * (delta % 40);
             }
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            iterJ += .08;
-            if(iterJ + .05 < 4)
+            else
             {
-                timer3.Enabled = true;
-                timer2.Enabled = false;
-                iterI = .05;
-            } else
-            {
-                timer3.Enabled = false;
+                viewingPlaneIterator += 0.4;
             }
-            glControl1.Invalidate();
-        }
 
-        private void timer3_Tick(object sender, EventArgs e)
-        {
-            iterI += .05;
-            if (iterI + .05 >= 4)
-            {
-                timer2.Enabled = true;
-                timer3.Enabled = false;
-            }
             glControl1.Invalidate();
         }
     }
