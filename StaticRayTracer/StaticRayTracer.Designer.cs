@@ -32,6 +32,8 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.glControl1 = new OpenTK.GLControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // glControl1
@@ -39,7 +41,7 @@
             this.glControl1.BackColor = System.Drawing.Color.Black;
             this.glControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.glControl1.Location = new System.Drawing.Point(0, 0);
-            this.glControl1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.glControl1.Margin = new System.Windows.Forms.Padding(12);
             this.glControl1.Name = "glControl1";
             this.glControl1.Size = new System.Drawing.Size(1168, 1081);
             this.glControl1.TabIndex = 4;
@@ -54,6 +56,15 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // StaticRayTracer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -61,7 +72,7 @@
             this.ClientSize = new System.Drawing.Size(1168, 1081);
             this.Controls.Add(this.glControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StaticRayTracer";
@@ -75,6 +86,8 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private OpenTK.GLControl glControl1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

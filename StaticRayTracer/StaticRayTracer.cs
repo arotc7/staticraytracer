@@ -18,11 +18,17 @@ namespace StaticRayTracer
     public partial class StaticRayTracer : Form
     {
         private Point3D _lightingPoint;
+        private Vector3 _cameraOffset;
+
+        double iterI = .05;
+        double iterJ = .05;
+
         private bool _testing;
 
         public StaticRayTracer()
         {
             _lightingPoint = new Point3D(2, 3, 4);
+            _cameraOffset = new Vector3(0, 0, -4);
             InitializeComponent();
         }
 
@@ -69,7 +75,7 @@ namespace StaticRayTracer
             else
             {
                 // testing values
-                eye = new Point3D(0, 0, -2);
+                eye = new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
                 look = new Point3D(0, 0, 10);
             }
 
@@ -157,10 +163,34 @@ namespace StaticRayTracer
             }
             GL.PopMatrix();
 
+            if (!_testing)
+            {
+                GL.Color3(Color.Blue);
+                GL.Begin(PrimitiveType.LineStrip);
+                {
+                    Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(2 - iterI, 2 - iterJ + .02, 3));
+                    rayVector *= (1 / rayVector.Length);
+                    rayVector *= 100;
+                    GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                    GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
+                }
+                GL.End();
+            }
+
+            if (_testing)
+            {
+                GL.PointSize(2);
+                GL.Begin(PrimitiveType.Points);
+                {
+                    GL.Vertex3(2 - iterI, 2 - iterJ - .02, 3);
+                }
+                GL.End();
+            }
+
             // draw the camera shape
             GL.PushMatrix();
             {
-                GL.Translate(0, -0.5, -1);
+                GL.Translate(0, -0.5, _cameraOffset.Z);
 
                 GL.Color3(Color.Black);
                 GL.Begin(PrimitiveType.LineLoop);
@@ -239,7 +269,7 @@ namespace StaticRayTracer
             GL.Begin(PrimitiveType.LineStrip);
             {
                 // draw the ray from the eye to the top of the sphere
-                GL.Vertex3(0.0, 0.0, 0.0);
+                GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
                 GL.Vertex3(0, 1, 7);
                 GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
             }
@@ -278,7 +308,7 @@ namespace StaticRayTracer
             // Draw the vector to the shadow
             GL.Begin(PrimitiveType.LineStrip);
             {
-                GL.Vertex3(0, 0, 0);
+                GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
                 GL.Vertex3(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
                 GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
             }
@@ -388,7 +418,37 @@ namespace StaticRayTracer
             if(e.KeyChar == 't')
             {
                 _testing = !_testing;
+                glControl1.Invalidate();
+            } else if(e.KeyChar == 'p')
+            {
+                timer1.Enabled = !timer1.Enabled;
             }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            iterJ += .08;
+            if(iterJ + .05 < 4)
+            {
+                timer3.Enabled = true;
+                timer2.Enabled = false;
+                iterI = .05;
+            } else
+            {
+                timer3.Enabled = false;
+            }
+            glControl1.Invalidate();
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            iterI += .05;
+            if (iterI + .05 >= 4)
+            {
+                timer2.Enabled = true;
+                timer3.Enabled = false;
+            }
+            glControl1.Invalidate();
         }
     }
 }
