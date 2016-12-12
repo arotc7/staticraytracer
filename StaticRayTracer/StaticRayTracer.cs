@@ -56,6 +56,9 @@ namespace StaticRayTracer
 
             GL.Enable(EnableCap.DepthTest);
 
+            // normalize vectors for proper shading
+            GL.Enable(EnableCap.Normalize);
+
             // set large point size
             GL.PointSize(10);
         }
@@ -200,8 +203,6 @@ namespace StaticRayTracer
                         GL.PointSize(10);
                         GL.Begin(PrimitiveType.Points);
                         {
-                            Console.WriteLine("{0}", viewingPlaneIterator);
-
                             // GL.Vertex3(2 - iterI, 2 - iterJ - .02, 3);
                             GL.Vertex3(x, y, 3);
                         }
@@ -271,20 +272,50 @@ namespace StaticRayTracer
             GL.PopMatrix();
 
             // draw floor
-            GL.Disable(EnableCap.Lighting);
+            //GL.Enable(EnableCap.Lighting);
+            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.AmbientAndDiffuse, Color4.Green);
             GL.PushMatrix();
             {
-                GL.Color3(Color.Cornsilk);
-                GL.Translate(0, -2, 0);
-                GL.Begin(PrimitiveType.TriangleFan);
+                //GL.Color3(Color.Cornsilk);
+                GL.Translate(0, -2.1, 7);
+
+                //GL.Translate(0.5, 0.5 * 1.0, 0.5);
+                GL.Scale(1.0, 0.1, 1.0);
+                GL.Translate(-5, 0, -10);
+                for (var i = 0; i < 20; i++)
+                {
+                    GL.Translate(0, 0, 1);
+                    for (var j = 0; j < 10; j++)
+                    {
+                        GL.Translate(1, 0, 0);
+                        GLU.Instance.DrawCube(true);
+                    }
+                    GL.Translate(-10, 0, 0);
+                }
+                
+
+                /*GL.Begin(PrimitiveType.QuadStrip);
                 {
                     GL.Normal3(0, 1, 0);
-                    GL.Vertex3(5, 0, 10);
-                    GL.Vertex3(5, 0, -10);
-                    GL.Vertex3(-5, 0, -10);
-                    GL.Vertex3(-5, 0, 10);
+
+                    /*for (var i = -5; i < 5; i++)
+                    {
+                        for (var j = -10; j < 10; j++)
+                        {
+                            GL.Vertex3(i, 0, j);
+                        }
+                    }
+
+                    GL.Vertex3(3, 0, 5);
+                    GL.Vertex3(-3, 0, 5);
+                    GL.Vertex3(3, 0, 4);
+                    GL.Vertex3(-3, 0, 4);
+                    GL.Vertex3(3, 0, 3);
+                    GL.Vertex3(-3, 0, 3);
+                    GL.Vertex3(3, 0, 2);
+                    GL.Vertex3(-3, 0, 2);
                 }
-                GL.End();
+                GL.End();*/
             }
             GL.PopMatrix();
 
@@ -315,7 +346,7 @@ namespace StaticRayTracer
                 lightToSphere *= lightToPlaneDistance;
 
                 GL.Disable(EnableCap.Lighting);
-                GL.Color3(Color.LightGray);
+                GL.Color3(0.1, 0.1, 0.1);
 
                 // draw the shadow
                 GL.PushMatrix();
