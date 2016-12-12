@@ -23,7 +23,7 @@ namespace StaticRayTracer
         //double iterI = .05;
         //double iterJ = .05;
 
-        private double viewingPlaneIterator = 0;
+        private int viewingPlaneIterator = 0;
 
         private bool _testing;
 
@@ -173,37 +173,43 @@ namespace StaticRayTracer
             }
             GL.PopMatrix();
 
-            if (_mode == Mode.ViewingPlaneRays)
+            GL.PushMatrix();
             {
-                GL.Color3(Color.Blue);
-                var d = viewingPlaneIterator % 40.0;
-                var y = Math.Floor(d / 4.0) * 0.4;
-                var x = d % 4.0;
-                if (!_testing)
+                if (_mode == Mode.ViewingPlaneRays)
                 {
-                    // if not testing, show rays through the viewing plane
-                    GL.Begin(PrimitiveType.LineStrip);
+                    GL.Color3(Color.Blue);
+                    var d = viewingPlaneIterator % 100.0;
+                    var y = ((Math.Floor(d / 10.0) * 0.4)) - 2.0 + 0.2;
+                    var x = ((d % 10.0) * 0.4) - 2.0 + 0.2;
+                    if (!_testing)
                     {
-                        Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(x-2.0+0.2, y-2.0+0.2, 3));
-                        rayVector *= (1 / rayVector.Length);
-                        rayVector *= 10;
-                        GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                        GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
+                        // if not testing, show rays through the viewing plane
+                        GL.Begin(PrimitiveType.LineStrip);
+                        {
+                            Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(x, y, 3));
+                            rayVector *= (1 / rayVector.Length);
+                            rayVector *= 10; // length
+                            GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                            GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
+                        }
+                        GL.End();
                     }
-                    GL.End();
-                }
-                else
-                {
-                    // if testing eye point, display points in each grid point on the viewing plane
-                    GL.PointSize(10);
-                    GL.Begin(PrimitiveType.Points);
+                    else
                     {
-                        // GL.Vertex3(2 - iterI, 2 - iterJ - .02, 3);
-                        GL.Vertex3(x-2.0+0.2, y-2.0+0.2, 3);
+                        // if testing eye point, display points in each grid point on the viewing plane
+                        GL.PointSize(10);
+                        GL.Begin(PrimitiveType.Points);
+                        {
+                            Console.WriteLine("{0}", viewingPlaneIterator);
+
+                            // GL.Vertex3(2 - iterI, 2 - iterJ - .02, 3);
+                            GL.Vertex3(x, y, 3);
+                        }
+                        GL.End();
                     }
-                    GL.End();
                 }
             }
+            GL.PopMatrix();
 
             // draw the camera shape
             GL.PushMatrix();
@@ -316,7 +322,7 @@ namespace StaticRayTracer
                 {
                     GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
                     GL.Rotate(90, 1, 0, 0);
-                    GL.Scale(1.4, 1, 1); // todo mathmatically calculate the skew in each x and y directions
+                    GL.Scale(1.4, 1, 1); // todo?: mathmatically calculate the skew in each x and y directions
 
                     GL.Begin(PrimitiveType.Polygon);
                     {
@@ -455,7 +461,7 @@ namespace StaticRayTracer
             }
             else
             {
-                viewingPlaneIterator += 0.4;
+                viewingPlaneIterator++;
             }
 
             glControl1.Invalidate();
