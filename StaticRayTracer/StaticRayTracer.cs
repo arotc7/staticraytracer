@@ -88,8 +88,10 @@ namespace StaticRayTracer
             else
             {
                 // testing values
-                eye = new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                look = new Point3D(0, 0, 10);
+                //eye = new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                //look = new Point3D(0, 0, 10);
+                eye = new Point3D(0, 10, 4);
+                look = new Point3D(0, 0, 3);
             }
 
             GLU.Instance.LookAt(eye, look);
@@ -184,14 +186,15 @@ namespace StaticRayTracer
                     var d = viewingPlaneIterator % 100.0;
                     var y = ((Math.Floor(d / 10.0) * 0.4)) - 2.0 + 0.2;
                     var x = ((d % 10.0) * 0.4) - 2.0 + 0.2;
-                    if (!_testing)
+
+                    if (true) //(!_testing) // TESTING:
                     {
                         // if not testing, show rays through the viewing plane
                         GL.Begin(PrimitiveType.LineStrip);
                         {
                             Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(x, y, 3));
                             rayVector *= (1 / rayVector.Length);
-                            rayVector *= 10; // length
+                            rayVector *= 2; // length
                             GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
                             GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
                         }
@@ -320,6 +323,17 @@ namespace StaticRayTracer
             GL.PopMatrix();
 
 
+            // Math to find where to place the shadow
+            Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
+            lightToSphere *= (1 / lightToSphere.Length);
+            // calculated from the line to a point intersection formula. 
+            // equation of the plane is y + 2 = 0
+            // equation of the line is _lightSource + t * lightToSphere
+            double lightToPlaneDistance = (-1.98 - _lightingPoint.Y) / lightToSphere.Y;
+
+            lightToSphere *= lightToPlaneDistance;
+
+            // if lighting mode draw the rays
             if (_mode == Mode.Lighting)
             {
                 // draw the rays
@@ -334,35 +348,6 @@ namespace StaticRayTracer
                 }
                 GL.End();
 
-                // Math to find where to place the shadow
-                Vector3 lightToSphere = new Vector3(_lightingPoint, new Point3D(0, 0, 7));
-                lightToSphere *= (1 / lightToSphere.Length);
-
-                // calculated from the line to a point intersection formula. 
-                // equation of the plane is y + 2 = 0
-                // equation of the line is _lightSource + t * lightToSphere
-                double lightToPlaneDistance = (-1.98 - _lightingPoint.Y) / lightToSphere.Y;
-
-                lightToSphere *= lightToPlaneDistance;
-
-                GL.Disable(EnableCap.Lighting);
-                GL.Color3(0.1, 0.1, 0.1);
-
-                // draw the shadow
-                GL.PushMatrix();
-                {
-                    GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
-                    GL.Rotate(90, 1, 0, 0);
-                    GL.Scale(1.4, 1, 1); // todo?: mathmatically calculate the skew in each x and y directions
-
-                    GL.Begin(PrimitiveType.Polygon);
-                    {
-                        Utilities.DrawArc(0, 0, 1, 0, 360);
-                    }
-                    GL.End();
-                }
-                GL.PopMatrix();
-
                 GL.Color3(Color.Blue);
                 // Draw the vector to the shadow
                 GL.Begin(PrimitiveType.LineStrip);
@@ -372,7 +357,26 @@ namespace StaticRayTracer
                     GL.Vertex3(_lightingPoint.X, _lightingPoint.Y, _lightingPoint.Z);
                 }
                 GL.End();
+
             }
+
+            GL.Disable(EnableCap.Lighting);
+            GL.Color3(0.1, 0.1, 0.1);
+
+            // draw the shadow
+            GL.PushMatrix();
+            {
+                GL.Translate(_lightingPoint.X + lightToSphere.X, _lightingPoint.Y + lightToSphere.Y, _lightingPoint.Z + lightToSphere.Z);
+                GL.Rotate(90, 1, 0, 0);
+                GL.Scale(1.4, 1, 1); // todo?: mathmatically calculate the skew in each x and y directions
+
+                GL.Begin(PrimitiveType.Polygon);
+                {
+                    Utilities.DrawArc(0, 0, 1, 0, 360);
+                }
+                GL.End();
+            }
+            GL.PopMatrix();
 
             glControl1.SwapBuffers();
         }
@@ -478,6 +482,8 @@ namespace StaticRayTracer
             {
                 _mode = _mode == Mode.Lighting ? Mode.ViewingPlaneRays : Mode.Lighting;
             }
+
+            glControl1.Invalidate();
         }
 
         private int delta = 0;
