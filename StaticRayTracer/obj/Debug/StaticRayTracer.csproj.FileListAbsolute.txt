@@ -13,3 +13,18 @@ C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
 C:\Users\mattb\Desktop\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe.config
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.exe
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\StaticRayTracer.pdb
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\342lib.dll
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\GlutDrawingReplacements.dll
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.dll
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.dll
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\bin\Debug\mygraphicslib.pdb
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csprojResolveAssemblyReference.cache
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.StaticRayTracer.resources
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.Properties.Resources.resources
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.csproj.GenerateResource.Cache
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.exe
+C:\Users\Andrew Rot\Documents\andrew.rot\staticraytracer\StaticRayTracer\obj\Debug\StaticRayTracer.pdb

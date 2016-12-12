@@ -88,10 +88,10 @@ namespace StaticRayTracer
             else
             {
                 // testing values
-                //eye = new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                //look = new Point3D(0, 0, 10);
-                eye = new Point3D(0, 10, 4);
-                look = new Point3D(0, 0, 3);
+                eye = new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
+                look = new Point3D(0, 0, 10);
+                //eye = new Point3D(0, 10, 4);
+                //look = new Point3D(0, 0, 3);
             }
 
             GLU.Instance.LookAt(eye, look);
@@ -183,20 +183,20 @@ namespace StaticRayTracer
                 if (_mode == Mode.ViewingPlaneRays)
                 {
                     GL.Color3(Color.Blue);
-                    var d = viewingPlaneIterator % 100.0;
-                    var y = ((Math.Floor(d / 10.0) * 0.4)) - 2.0 + 0.2;
-                    var x = ((d % 10.0) * 0.4) - 2.0 + 0.2;
+                    double d = viewingPlaneIterator % 100.0;
+                    double y = ((Math.Floor(d / 10.0) * 0.4)) - 2.0 + 0.2;
+                    double x = ((d % 10.0) * 0.4) - 2.0 + 0.2;
 
-                    if (true) //(!_testing) // TESTING:
+                    if (!_testing) // TESTING:
                     {
                         // if not testing, show rays through the viewing plane
                         GL.Begin(PrimitiveType.LineStrip);
                         {
                             Vector3 rayVector = new Vector3(new Point3D(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1), new Point3D(x, y, 3));
                             rayVector *= (1 / rayVector.Length);
-                            rayVector *= 2; // length
+                            rayVector *= 100; // length
                             GL.Vertex3(_cameraOffset.X, _cameraOffset.Y, _cameraOffset.Z + 1);
-                            GL.Vertex3(rayVector.X, rayVector.Y, rayVector.Z);
+                            GL.Vertex3(x, y, 3);
                         }
                         GL.End();
                     }
